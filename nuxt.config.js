@@ -1,5 +1,8 @@
 require('dotenv').config()
 export default {
+  generate: {
+    fallback: true
+  },
   mode: 'universal',
   env: {
     apiUrl: process.env.API_URL || 'https://newsletters.academlo.com/api/v1/newsletters',
