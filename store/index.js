@@ -1,12 +1,10 @@
 export const state = () => ({
-  counter: 0,
-  name: 'asdf'
+  user: {},
+  authenticated: false
 })
 export const mutations = {
-  increment(state) {
-    state.counter++
-  },
-  neim(state) {
-    state.name = this.prueba
+  login(state, user) {
+    state.user = user
+    state.authenticated = true
   }
 }
