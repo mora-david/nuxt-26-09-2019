@@ -18,37 +18,52 @@
             class="mb-2"
           >
             <b-card-text>{{ datacard.description }}</b-card-text>
-
+            <b-card-text>{{ datacard.target }}</b-card-text>
+            <b-card-text>{{ datacard.subscribed }}</b-card-text>
             <input type="email" :id="'id' + datacard.id" />
             <b-button
-              @click.prevent="suscribe(datacard.id)"
+              @click.prevent="
+                suscribe(datacard.id)
+                $bvModal.show(datacard.id)
+              "
               href="#"
               variant="primary"
               >Agregar Email</b-button
             >
           </b-card>
         </div>
+        <modal :datacard1="datacard"></modal>
       </div>
+    </div>
+    <div>
+      <p>{{ $store.state.name }} g</p>
+      <button @click="neim">hello</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 //  import card1 from '@/components/card1.vue'
 import axios from 'axios'
+import modal from '@/components/modal.vue'
 
 export default {
-  components: {},
+  components: {
+    modal
+  },
   data() {
     return {
       datacards: '',
-      infos: { email: '', newsletter_id: '1' }
+      infos: { email: 'dd', newsletter_id: '1' },
+      prueba: { name: 'jorge' }
     }
   },
   created() {
     this.getNews()
   },
   methods: {
+    ...mapMutations(['neim']),
     suscribe(param) {
       const url = 'https://newsletters.academlo.com/api/v1/users'
       const data = {

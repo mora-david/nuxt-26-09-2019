@@ -17,13 +17,17 @@
 
               <input type="email" :id="'id' + tag.id" />
               <b-button
-                @click.prevent="suscribe(tag.id)"
+                @click.prevent="
+                  suscribe(tag.id)
+                  $bvModal.show(tag.id)
+                "
                 href="#"
                 variant="primary"
                 >Agregar Email</b-button
               >
             </b-card>
           </div>
+          <modal :datacard1="tag"></modal>
         </div>
       </div>
     </div>
@@ -32,9 +36,10 @@
 
 <script>
 import axios from 'axios'
+import modal from '@/components/modal.vue'
 
 export default {
-  components: {},
+  components: { modal },
   data() {
     return {
       categories: '',
