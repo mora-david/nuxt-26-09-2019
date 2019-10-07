@@ -1,9 +1,8 @@
 <template>
   <div>
-    <navbar></navbar>
     <div class="container">
       <div
-        v-for="datacard in datacards.data"
+        v-for="datacard in datacardsTar"
         :key="datacard.id"
         class="container"
       >
@@ -18,8 +17,8 @@
             class="mb-2"
           >
             <b-card-text>{{ datacard.description }}</b-card-text>
-            <b-card-text>{{ datacard.target }}</b-card-text>
-            <b-card-text>{{ datacard.subscribed }}</b-card-text>
+            <b-card-text>target:{{ datacard.target }}</b-card-text>
+            <b-card-text>Subscribed:{{ datacard.subscribed }}</b-card-text>
             <input type="email" :id="'id' + datacard.id" />
             <b-button
               @click.prevent="
@@ -36,8 +35,45 @@
       </div>
     </div>
     <div>
-      <p>{{ $store.state.name }} g</p>
-      <button @click="neim">hello</button>
+      <h2 style="padding-left:650px">Up-and-Coming</h2>
+      <p style="padding-left:300px">
+        if these newsletter reach their goals (or get sponsorship),we´ll bring
+        on expert writers and launch them. Vote for all your favorites
+      </p>
+      <div class="container">
+        <div
+          v-for="datacard in datacardsSub"
+          :key="datacard.id"
+          class="container"
+        >
+          <div>
+            <b-card
+              :title="datacard.title"
+              :img-src="datacard.image"
+              img-alt="Image"
+              img-top
+              tag="article"
+              style="max-width: 20rem;"
+              class="mb-2"
+            >
+              <b-card-text>{{ datacard.description }}</b-card-text>
+              <b-card-text>target:{{ datacard.target }}</b-card-text>
+              <b-card-text>Subscribed:{{ datacard.subscribed }}</b-card-text>
+              <input type="email" :id="'id' + datacard.id" />
+              <b-button
+                @click.prevent="
+                  suscribe(datacard.id)
+                  $bvModal.show(datacard.id)
+                "
+                href="#"
+                variant="primary"
+                >Agregar Email</b-button
+              >
+            </b-card>
+          </div>
+          <modal :datacard1="datacard"></modal>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +91,8 @@ export default {
   data() {
     return {
       datacards: '',
+      datacardsSub: '',
+      datacardsTar: '',
       infos: { email: 'dd', newsletter_id: '1' },
       prueba: { name: 'jorge' }
     }
@@ -77,12 +115,23 @@ export default {
           alert('error')
         })
     },
+    filter(newsletters) {
+      const approved = newsletters.filter(function(newsletter) {
+        return newsletter.subscribed >= newsletter.target
+      })
+      console.log(approved)
+      return approved
+    },
     getNews() {
       const url = process.env.apiUrl
       axios
         .get(url)
         .then((response) => {
           this.datacards = response
+          this.datacardsSub = this.filter(this.datacards.data)
+          this.datacardsTar = this.datacards.data.filter(
+            (tar) => tar.subscribed < tar.target
+          )
         })
         .catch(() => {
           alert('error')
@@ -94,6 +143,7 @@ export default {
         .get(url)
         .then((response) => {
           this.datacards = response
+          this.datacardsSub = this.filter(this.datacards.data)
         })
         .catch(() => {
           alert('error')

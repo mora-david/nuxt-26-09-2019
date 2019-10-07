@@ -1,7 +1,5 @@
 <template>
   <div class="container mt-5">
-    <router-link to="/dashboard">Dashboard</router-link>
-    <nuxt-link to="register">Registro</nuxt-link>
     <hr />
     <b-form @submit.prevent="onSubmit">
       <b-form-group
