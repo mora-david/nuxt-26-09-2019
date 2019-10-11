@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div class="container">
+    <div>
       <div
-        v-for="datacard in datacardsTar"
+        v-for="datacard in datacardsSub"
         :key="datacard.id"
         class="container"
+        style="display:flex"
       >
         <div>
           <b-card
@@ -19,19 +20,19 @@
             <b-card-text>{{ datacard.description }}</b-card-text>
             <b-card-text>target:{{ datacard.target }}</b-card-text>
             <b-card-text>Subscribed:{{ datacard.subscribed }}</b-card-text>
-            <input type="email" :id="'id' + datacard.id" />
+            <!-- <input type="email" :id="'id' + datacard.id" /> -->
             <b-button
               @click.prevent="
-                suscribe(datacard.id)
+                //  suscribe(datacard.id)
                 $bvModal.show(datacard.id)
               "
               href="#"
               variant="primary"
-              >Agregar Email</b-button
+              >Subscribe</b-button
             >
           </b-card>
         </div>
-        <modal :datacard1="datacard"></modal>
+        <modal :datacard1="datacard" :metos1="suscribe"></modal>
       </div>
     </div>
     <div>
@@ -40,9 +41,9 @@
         if these newsletter reach their goals (or get sponsorship),we´ll bring
         on expert writers and launch them. Vote for all your favorites
       </p>
-      <div class="container">
+      <div style="display:flex; flex-wrap:wrap; width:90%">
         <div
-          v-for="datacard in datacardsSub"
+          v-for="datacard in datacardsTar"
           :key="datacard.id"
           class="container"
         >
@@ -59,19 +60,20 @@
               <b-card-text>{{ datacard.description }}</b-card-text>
               <b-card-text>target:{{ datacard.target }}</b-card-text>
               <b-card-text>Subscribed:{{ datacard.subscribed }}</b-card-text>
-              <input type="email" :id="'id' + datacard.id" />
+              <!-- <input type="email" :id="'id' + datacard.id" /> -->
               <b-button
                 @click.prevent="
-                  suscribe(datacard.id)
+                  // suscribe(datacard.id)
                   $bvModal.show(datacard.id)
                 "
                 href="#"
                 variant="primary"
-                >Agregar Email</b-button
+                >Subscribe</b-button
               >
             </b-card>
           </div>
-          <modal :datacard1="datacard"></modal>
+          <modal :datacard1="datacard" :metos1="suscribe"></modal>
+          <!-- <modal :datacard1="datacard" :metos1="prueba1"></modal> -->
         </div>
       </div>
     </div>
@@ -115,6 +117,9 @@ export default {
           alert('error')
         })
     },
+    prueba1() {
+      alert('funciono')
+    },
     filter(newsletters) {
       const approved = newsletters.filter(function(newsletter) {
         return newsletter.subscribed >= newsletter.target
@@ -152,36 +157,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
