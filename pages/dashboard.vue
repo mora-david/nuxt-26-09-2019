@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container my-5">
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -44,6 +44,8 @@ import { mapMutations } from 'vuex'
 import axios from 'axios'
 import modalAddNew from '@/components/modalAddNew.vue'
 export default {
+  middleware: 'authenticated',
+  layout: 'withlog',
   components: { modalAddNew },
   data() {
     return {

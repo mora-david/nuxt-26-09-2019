@@ -1,32 +1,30 @@
 <template>
   <div>
     <div>
-      <div class="container" style="margin:50px">
-        <div v-for="tag in categories1" :key="tag.slug" class="container">
-          <div>
-            <b-card
-              :title="tag.title"
-              :img-src="tag.image"
-              img-alt="Image"
-              img-top
-              tag="article"
-              style="max-width: 20rem;"
-              class="mb-2"
-            >
-              <b-card-text>{{ tag.description }} {{ tag.id }}</b-card-text>
+      <div class="d-flex p-2 bd-highlight" style="margin:50px">
+        <div v-for="tag in categories1" :key="tag.slug" class>
+          <b-card
+            :title="tag.title"
+            :img-src="tag.image"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="max-width: 20rem;"
+            class="mb-2"
+          >
+            <b-card-text>{{ tag.description }} {{ tag.id }}</b-card-text>
 
-              <input type="email" :id="'id' + tag.id" />
-              <b-button
-                @click.prevent="
-                  suscribe(tag.id)
-                  $bvModal.show(tag.id)
-                "
-                href="#"
-                variant="primary"
-                >Agregar Email</b-button
-              >
-            </b-card>
-          </div>
+            <input type="email" :id="'id' + tag.id" />
+            <b-button
+              @click.prevent="
+                suscribe(tag.id)
+                $bvModal.show(tag.id)
+              "
+              href="#"
+              variant="primary"
+              >Agregar Email</b-button
+            >
+          </b-card>
           <modal :datacard1="tag"></modal>
         </div>
       </div>

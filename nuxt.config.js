@@ -22,7 +22,7 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, { href:"https://fonts.googleapis.com/css?family=Oswald&display=swap", rel:"stylesheet" }, {rel:"stylesheet", href:"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", integrity:"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", crossorigin:"anonymous"}]
   },
   /*
    ** Customize the progress-bar color
@@ -31,11 +31,13 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ["~/assets/style.css"],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    '~/plugins/vee-validate.js'
+  ],
   /*
    ** Nuxt.js dev-modules
    */

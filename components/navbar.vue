@@ -1,8 +1,7 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand href="#">NavBar</b-navbar-brand>
-
+    <h3 style="color:red; margin-left:50px">[INSIDE]</h3>
+    <b-navbar toggleable="lg" type="dark" variant="info" class="bg-danger">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
@@ -24,13 +23,8 @@
             <nuxt-link to="/formulario" style="color:white; padding:6px"
               >Login</nuxt-link
             >
-            <b-form-input
-              size="sm"
-              class="mr-sm-2"
-              placeholder="Search"
-            ></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit"
-              >Search</b-button
+            <nuxt-link to="/dashboard" style="color:white; padding:6px"
+              >Panel</nuxt-link
             >
           </b-nav-form>
         </b-navbar-nav>
